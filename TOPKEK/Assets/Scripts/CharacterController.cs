@@ -23,7 +23,7 @@ public class CharacterController : MonoBehaviour
 
     private void Update()
     {
-        GetInputs();
+       // GetInputs();
         Move();
     }
 
@@ -49,18 +49,27 @@ public class CharacterController : MonoBehaviour
 
     private void GetInputs()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Z))
         {
-            currentPoint++;
-            currentPoint = Mathf.Clamp(currentPoint, 0, pathsPoints.Count - 1);
-            UpdatePlayerPos();
+            GoUp();
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
         {
-            currentPoint--;
-            currentPoint = Mathf.Clamp(currentPoint, 0, pathsPoints.Count - 1);
-            UpdatePlayerPos();
+            GoDown();
         }
+    }
+
+    public void GoUp()
+    {
+        currentPoint++;
+        currentPoint = Mathf.Clamp(currentPoint, 0, pathsPoints.Count - 1);
+        UpdatePlayerPos();
+    }
+    public void GoDown()
+    {
+        currentPoint--;
+        currentPoint = Mathf.Clamp(currentPoint, 0, pathsPoints.Count - 1);
+        UpdatePlayerPos();
     }
 
     private void UpdatePlayerPos()
